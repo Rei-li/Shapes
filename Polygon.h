@@ -11,10 +11,10 @@ class Polygon : public Shape {
 
 public:
 	float GetArea();
-	int GetPerimeter();
+	float GetPerimeter();
 	Point GetCenter();
 
-	void MoveCenter();
+	void SetCenter();
 	void Rotate();
 	void Scale();
 

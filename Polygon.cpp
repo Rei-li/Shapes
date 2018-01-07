@@ -30,8 +30,19 @@ float Polygon::GetArea() {
 	return area;
 }
 
-int Polygon::GetPerimeter() {
-	return 0;
+float Polygon::GetPerimeter() {
+
+	int size = PivotPoints.size();
+	int previousIndex = size - 1;
+	float p;
+	for (int currentIndex = 0; currentIndex < size; currentIndex++) {
+
+		p + GetDistance(PivotPoints[previousIndex], PivotPoints[currentIndex]);
+
+		previousIndex = currentIndex;
+	}
+
+	return p;
 }
 
 Point Polygon::GetCenter() {
@@ -75,7 +86,7 @@ Point Polygon::GetCenter() {
 	return centerPoint;
 }
 
-void Polygon::MoveCenter() {
+void Polygon::SetCenter() {
 
 }
 
