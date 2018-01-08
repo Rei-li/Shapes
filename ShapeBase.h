@@ -13,10 +13,10 @@ public:
 	virtual float GetPerimeter() = 0;
 	virtual Point GetCenter();
 
-	virtual void SetCenter(int x, int y);
-	virtual void Move();
+	void SetCenter(int x, int y);
+	void Move(int xStart, int yStart, int xEnd, int yEnd);
 	void Rotate(int x, int y);
-	virtual void Scale();
+	void Scale(int distance);
 
 	virtual std::vector<Point> Drow();
 

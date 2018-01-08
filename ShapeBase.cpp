@@ -39,3 +39,39 @@ void Shape::Rotate(int x, int y) {
 	}
 
 }
+
+void Shape::Scale(int times) {
+	for (int i = 0; i < PivotPoints.size(); i++) {
+		Point currentPoint = PivotPoints[i];
+		int currentX = currentPoint.GetX();
+		int currentY = currentPoint.GetY();
+		currentPoint.SetX(currentX / times);
+		currentPoint.SetY(currentY / times);
+	}
+
+}
+
+void Shape::Move(int xStart, int yStart, int xEnd, int yEnd) {
+	for (int i = 0; i < PivotPoints.size(); i++) {
+		Point currentPoint = PivotPoints[i];
+		int currentX = currentPoint.GetX();
+		int currentY = currentPoint.GetY();
+		currentPoint.SetX(currentX + (xStart - xEnd));
+		currentPoint.SetY(currentY + (yStart - yEnd));
+	}
+}
+
+void Shape::SetCenter(int x, int y) {
+	for (int i = 0; i < PivotPoints.size(); i++) {
+		Point currentPoint = PivotPoints[i];
+		int currentX = currentPoint.GetX();
+		int currentY = currentPoint.GetY();
+
+		Point centerPoint = GetCenter();
+		int centerX = centerPoint.GetX();
+		int centerY = centerPoint.GetY();
+
+		currentPoint.SetX(currentX + (x - centerX));
+		currentPoint.SetY(currentY + (y - centerY));
+	}
+}
