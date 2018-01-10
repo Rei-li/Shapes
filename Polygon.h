@@ -1,42 +1,30 @@
-// ---------------------------------------------------------------------------
+#pragma once
 
-#ifndef PolygonH
-#define PolygonH
-#include "ShapeBase.h"
 #include <vector>
-// ---------------------------------------------------------------------------
-#endif
-
+#include "ShapeBase.h"
+	 #include "CanvasPoint.h"
 class Polygon : public Shape {
 
 public:
 	float GetArea();
 	float GetPerimeter();
-	Point GetCenter();
-
-	void SetCenter();
-	void Rotate();
-	void Scale();
-
-	std::vector<Point>Drow();
+	CanvasPoint GetCenter();
 
 private:
-	bool IsPointInPolygon(Point point);
-	float AreaOfConvexPolygon();
-	float CenterOfConvexPolygon();
-	float GetDistance(Point startPoint, Point endPoint);
-	float GetAngleValue(Point previousPoint, Point currentPoint,
-		Point nextPoint);
-	std::vector<Point>GetSetOfPointsWithAngleValues
-		(std::vector<Point>pivotPoints);
-	std::vector<Point>GetSortedListByAngles
-		(std::vector<Point>pivotPointsWithAngles);
-	void QuickSortByAngles(std::vector<Point> *points, int left, int right);
-	std::vector<Point>Copy(std::vector<Point> *points);
-	Point GetPointWithMaxAngle(std::vector<Point>pivotPointsWithAngles);
+	bool IsCanvasPointInPolygon(CanvasPoint CanvasPoint);
+	float GetDistance(CanvasPoint startCanvasPoint, CanvasPoint endCanvasPoint);
+	float GetAngleValue(CanvasPoint previousCanvasPoint, CanvasPoint currentCanvasPoint,
+		CanvasPoint nextCanvasPoint);
+	std::vector<CanvasPoint>GetSetOfCanvasPointsWithAngleValues
+		(std::vector<CanvasPoint>pivotCanvasPoints);
+	std::vector<CanvasPoint>GetSortedListByAngles
+		(std::vector<CanvasPoint>pivotCanvasPointsWithAngles);
+	void QuickSortByAngles(std::vector<CanvasPoint> *CanvasPoints, int left, int right);
+	std::vector<CanvasPoint>Copy(std::vector<CanvasPoint> *CanvasPoints);
+	CanvasPoint GetCanvasPointWithMaxAngle(std::vector<CanvasPoint>pivotCanvasPointsWithAngles);
 	void GetPolygonTriangles(std::vector<Polygon> *triangles,
-	std::vector<Point>pivotPoints);
+		std::vector<CanvasPoint>pivotCanvasPoints);
 	std::vector<Polygon>Triangulation();
-    std::vector<Polygon>CopyTriangles(std::vector<Polygon> *triangles);
+	std::vector<Polygon>CopyTriangles(std::vector<Polygon> *triangles);
 
 };

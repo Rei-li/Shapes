@@ -1,8 +1,23 @@
-//---------------------------------------------------------------------------
-
-#pragma hdrstop
-
 #include "Circle.h"
-#include "ShapeBase.h"
-//---------------------------------------------------------------------------
-#pragma package(smart_init)
+
+
+float Circle::GetArea() {
+	return 0;
+}
+
+float Circle::GetPerimeter() {
+	return 0;
+}
+
+CanvasPoint Circle::GetCenter() {
+	return CanvasPoint();
+}
+
+void Circle::SetCenter() {
+}
+
+void Circle::Rotate() {
+}
+
+void Circle::Scale() {
+}

@@ -8,15 +8,20 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
+//#include "EditorService.h"
+//#include "Polygon.h"
+//#include "Circle.h"
+
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
-	TImage *EditorField;
 	TRadioGroup *ShapesRadioGroup;
 	TRadioButton *Plygon;
 	TRadioButton *Circle;
-	TRadioGroup *ActionsRadioGroup;
+	TPanel *EditorPanel;
+	TImage *Editor;
+	TRadioGroup *Actions;
 	TRadioButton *EditBtn;
 	TRadioButton *SelectBtn;
 private:	// User declarations

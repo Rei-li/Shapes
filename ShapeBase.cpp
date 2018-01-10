@@ -1,77 +1,73 @@
-// ---------------------------------------------------------------------------
-
-#pragma hdrstop
-
 #include "ShapeBase.h"
 #include <cmath>
 #include <vector>
+//using namespace std;
 
-// ---------------------------------------------------------------------------
-#pragma package(smart_init)
+void Shape::AddPivotCanvasPoint(int x, int y) {
+	CanvasPoint CanvasPoint;
+	CanvasPoint.SetX(x);
+	CanvasPoint.SetY(y);
 
-using namespace std;
-
-void Shape::AddPivotPoint(int x, int y) {
-	Point point;
-	point.SetX(x);
-	point.SetY(y);
-
-	PivotPoints.push_back(point);
+	PivotCanvasPoints.push_back(CanvasPoint);
 }
+
+CanvasPoint Shape::GetCenter() {
+	return  CanvasPoint();
+}
 
 void Shape::Rotate(int x, int y) {
 	float PI = 3.14159265;
 	float angleRadian = 90 * PI / 180;
 
-	for (int i = 0; i < PivotPoints.size(); i++) {
-		Point currentPoint = PivotPoints[i];
-		int currentX = currentPoint.GetX();
-		int currentY = currentPoint.GetY();
+	for (int i = 0; i < PivotCanvasPoints.size(); i++) {
+		CanvasPoint currentCanvasPoint = PivotCanvasPoints[i];
+		int currentX = currentCanvasPoint.GetX();
+		int currentY = currentCanvasPoint.GetY();
 
-		float X = (float)((currentPoint.GetX() - x) * cos(angleRadian) -
-			(currentPoint.GetY() - y) * sin(angleRadian) + x);
-		float Y = (float)((currentPoint.GetX() - x) * sin(angleRadian) +
-			(currentPoint.GetY() - y) * cos(angleRadian) + y);
+		float X = (float)((currentCanvasPoint.GetX() - x) * std::cos(angleRadian) -
+			(currentCanvasPoint.GetY() - y) * std::sin(angleRadian) + x);
+		float Y = (float)((currentCanvasPoint.GetX() - x) * std::sin(angleRadian) +
+			(currentCanvasPoint.GetY() - y) * std::cos(angleRadian) + y);
 
-		currentPoint.SetX(X);
-		currentPoint.SetY(Y);
+		currentCanvasPoint.SetX(X);
+		currentCanvasPoint.SetY(Y);
 
 	}
 
 }
 
 void Shape::Scale(int times) {
-	for (int i = 0; i < PivotPoints.size(); i++) {
-		Point currentPoint = PivotPoints[i];
-		int currentX = currentPoint.GetX();
-		int currentY = currentPoint.GetY();
-		currentPoint.SetX(currentX / times);
-		currentPoint.SetY(currentY / times);
+	for (int i = 0; i < PivotCanvasPoints.size(); i++) {
+		CanvasPoint currentCanvasPoint = PivotCanvasPoints[i];
+		int currentX = currentCanvasPoint.GetX();
+		int currentY = currentCanvasPoint.GetY();
+		currentCanvasPoint.SetX(currentX / times);
+		currentCanvasPoint.SetY(currentY / times);
 	}
 
 }
 
 void Shape::Move(int xStart, int yStart, int xEnd, int yEnd) {
-	for (int i = 0; i < PivotPoints.size(); i++) {
-		Point currentPoint = PivotPoints[i];
-		int currentX = currentPoint.GetX();
-		int currentY = currentPoint.GetY();
-		currentPoint.SetX(currentX + (xStart - xEnd));
-		currentPoint.SetY(currentY + (yStart - yEnd));
+	for (int i = 0; i < PivotCanvasPoints.size(); i++) {
+		CanvasPoint currentCanvasPoint = PivotCanvasPoints[i];
+		int currentX = currentCanvasPoint.GetX();
+		int currentY = currentCanvasPoint.GetY();
+		currentCanvasPoint.SetX(currentX + (xStart - xEnd));
+		currentCanvasPoint.SetY(currentY + (yStart - yEnd));
 	}
 }
 
 void Shape::SetCenter(int x, int y) {
-	for (int i = 0; i < PivotPoints.size(); i++) {
-		Point currentPoint = PivotPoints[i];
-		int currentX = currentPoint.GetX();
-		int currentY = currentPoint.GetY();
+	for (int i = 0; i < PivotCanvasPoints.size(); i++) {
+		CanvasPoint currentCanvasPoint = PivotCanvasPoints[i];
+		int currentX = currentCanvasPoint.GetX();
+		int currentY = currentCanvasPoint.GetY();
 
-		Point centerPoint = GetCenter();
-		int centerX = centerPoint.GetX();
-		int centerY = centerPoint.GetY();
+		CanvasPoint centerCanvasPoint = GetCenter();
+		int centerX = centerCanvasPoint.GetX();
+		int centerY = centerCanvasPoint.GetY();
 
-		currentPoint.SetX(currentX + (x - centerX));
-		currentPoint.SetY(currentY + (y - centerY));
+		currentCanvasPoint.SetX(currentX + (x - centerX));
+		currentCanvasPoint.SetY(currentY + (y - centerY));
 	}
 }
