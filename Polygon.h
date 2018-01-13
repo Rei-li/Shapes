@@ -2,7 +2,8 @@
 
 #include <vector>
 #include "ShapeBase.h"
-	 #include "CanvasPoint.h"
+#include "CanvasPoint.h"
+
 class Polygon : public Shape {
 
 public:
@@ -13,15 +14,17 @@ public:
 private:
 	bool IsCanvasPointInPolygon(CanvasPoint CanvasPoint);
 	float GetDistance(CanvasPoint startCanvasPoint, CanvasPoint endCanvasPoint);
-	float GetAngleValue(CanvasPoint previousCanvasPoint, CanvasPoint currentCanvasPoint,
-		CanvasPoint nextCanvasPoint);
+	float GetAngleValue(CanvasPoint previousCanvasPoint,
+		CanvasPoint currentCanvasPoint, CanvasPoint nextCanvasPoint);
 	std::vector<CanvasPoint>GetSetOfCanvasPointsWithAngleValues
 		(std::vector<CanvasPoint>pivotCanvasPoints);
 	std::vector<CanvasPoint>GetSortedListByAngles
 		(std::vector<CanvasPoint>pivotCanvasPointsWithAngles);
-	void QuickSortByAngles(std::vector<CanvasPoint> *CanvasPoints, int left, int right);
+	void QuickSortByAngles(std::vector<CanvasPoint> *CanvasPoints, int left,
+		int right);
 	std::vector<CanvasPoint>Copy(std::vector<CanvasPoint> *CanvasPoints);
-	CanvasPoint GetCanvasPointWithMaxAngle(std::vector<CanvasPoint>pivotCanvasPointsWithAngles);
+	CanvasPoint GetCanvasPointWithMaxAngle
+		(std::vector<CanvasPoint>pivotCanvasPointsWithAngles);
 	void GetPolygonTriangles(std::vector<Polygon> *triangles,
 		std::vector<CanvasPoint>pivotCanvasPoints);
 	std::vector<Polygon>Triangulation();

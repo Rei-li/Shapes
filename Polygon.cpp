@@ -1,38 +1,65 @@
 #include "Polygon.h"
+#include "Logger.h"
 #include <cmath>
 #include <vector>
+#include <iostream>
+#include <string>
+
+// using namespace std;
 
 
-//using namespace std;
 
 float Polygon::GetArea() {
+
+
 	float area = 0;
 	int size = PivotCanvasPoints.size();
 	if (size > 3) {
 		std::vector<Polygon>triangles = Triangulation();
 		for (int i = 0; i < triangles.size(); i++) {
-			area + triangles[i].GetArea();
+			area = area + triangles[i].GetArea();
 		}
 	}
 	else {
+
+		Logger::WriteInfo("PivotCanvasPoints[0]: " + std::to_string
+			(PivotCanvasPoints[0].GetX()) + "  " + std::to_string
+			(PivotCanvasPoints[0].GetY()) + ";");
+
+		Logger::WriteInfo("PivotCanvasPoints[1]: " + std::to_string
+			(PivotCanvasPoints[1].GetX()) + "  " + std::to_string
+			(PivotCanvasPoints[1].GetY()) + ";");
+
 		float a = GetDistance(PivotCanvasPoints[0], PivotCanvasPoints[1]);
+		Logger::WriteInfo
+			("GetDistance(PivotCanvasPoints[0], PivotCanvasPoints[1]): " +
+			std::to_string(a/_dpcm));
 		float b = GetDistance(PivotCanvasPoints[1], PivotCanvasPoints[2]);
+		Logger::WriteInfo
+			("GetDistance(PivotCanvasPoints[1], PivotCanvasPoints[2]): " +
+			std::to_string(b/_dpcm));
 		float c = GetDistance(PivotCanvasPoints[2], PivotCanvasPoints[0]);
+		Logger::WriteInfo
+			("GetDistance(PivotCanvasPoints[2], PivotCanvasPoints[0]): " +
+			std::to_string(c/_dpcm));
 		float p = (a + b + c) / 2;
+		Logger::WriteInfo("p: " + std::to_string(p/_dpcm));
 		area = std::sqrt(p * (p - a) * (p - b) * (p - c));
+		Logger::WriteInfo("area: " + std::to_string(area/_dpcm));
 	}
 
-	return area;
+	return area/_dpcm;
 }
 
 float Polygon::GetPerimeter() {
 
-int size = PivotCanvasPoints.size();
+	int size = PivotCanvasPoints.size();
 	int previousIndex = size - 1;
 	float perimeter = 0;
 	for (int currentIndex = 0; currentIndex < size; currentIndex++) {
 
-		perimeter = perimeter + GetDistance(PivotCanvasPoints[previousIndex], PivotCanvasPoints[currentIndex]);
+		perimeter = perimeter + GetDistance(PivotCanvasPoints[previousIndex],
+			PivotCanvasPoints[currentIndex]);
 
 		previousIndex = currentIndex;
 	}
@@ -51,8 +78,10 @@ CanvasPoint Polygon::GetCenter() {
 		int ySum = 0;
 
 		for (int i = 0; i < triangles.size(); i++) {
-			xSum + (triangles[i].GetCenter().GetX() * triangles[i].GetArea());
-			ySum + (triangles[i].GetCenter().GetY() * triangles[i].GetArea());
+			xSum = xSum +
+				(triangles[i].GetCenter().GetX() * triangles[i].GetArea());
+			ySum = ySum +
+				(triangles[i].GetCenter().GetY() * triangles[i].GetArea());
 		}
 
 		float area = GetArea();
@@ -67,8 +96,8 @@ CanvasPoint Polygon::GetCenter() {
 		int xSum = 0;
 		int ySum = 0;
 		for (int i = 0; i < size; i++) {
-			xSum + PivotCanvasPoints[i].GetX();
-			ySum + PivotCanvasPoints[i].GetY();
+			xSum = xSum + PivotCanvasPoints[i].GetX();
+			ySum = ySum + PivotCanvasPoints[i].GetY();
 			counter++;
 		}
 
@@ -80,9 +109,6 @@ CanvasPoint Polygon::GetCenter() {
 
 	return centerCanvasPoint;
 }
-
-
-
 
 bool Polygon::IsCanvasPointInPolygon(CanvasPoint point) {
 	int size = PivotCanvasPoints.size();
@@ -98,11 +124,13 @@ bool Polygon::IsCanvasPointInPolygon(CanvasPoint point) {
 		int pivotPreviousCanvasPointX = pivotPreviousCanvasPoint.GetX();
 		int pivotPreviousCanvasPointY = pivotPreviousCanvasPoint.GetY();
 
-		if ((currentPivotCanvasPointY < point.GetY() && pivotPreviousCanvasPointY >=
-			point.GetY() || pivotPreviousCanvasPointY <
+		if ((currentPivotCanvasPointY <
+			point.GetY() && pivotPreviousCanvasPointY >= point.GetY() ||
+			pivotPreviousCanvasPointY <
 			point.GetY() && currentPivotCanvasPointY >= point.GetY()) &&
-			(currentPivotCanvasPointX + (point.GetY() - currentPivotCanvasPointY) /
-			(pivotPreviousCanvasPointY - currentPivotCanvasPointY) * (pivotPreviousCanvasPointX -
+			(currentPivotCanvasPointX + (point.GetY() -
+			currentPivotCanvasPointY) / (pivotPreviousCanvasPointY -
+			currentPivotCanvasPointY) * (pivotPreviousCanvasPointX -
 			currentPivotCanvasPointX) < point.GetX())) {
 			result = !result;
 		}
@@ -111,7 +139,8 @@ bool Polygon::IsCanvasPointInPolygon(CanvasPoint point) {
 	return result;
 }
 
-float Polygon::GetDistance(CanvasPoint startCanvasPoint, CanvasPoint endCanvasPoint) {
+float Polygon::GetDistance(CanvasPoint startCanvasPoint,
+	CanvasPoint endCanvasPoint) {
 
 	float x1 = (float)startCanvasPoint.GetX();
 	float y1 = (float)startCanvasPoint.GetY();
@@ -122,14 +151,14 @@ float Polygon::GetDistance(CanvasPoint startCanvasPoint, CanvasPoint endCanvasPo
 	return std::sqrt(std::pow(x2 - x1, 2) + std::pow(y2 - y1, 2));
 }
 
-float Polygon::GetAngleValue(CanvasPoint previousCanvasPoint, CanvasPoint currentCanvasPoint,
-	CanvasPoint nextCanvasPoint) {
+float Polygon::GetAngleValue(CanvasPoint previousCanvasPoint,
+	CanvasPoint currentCanvasPoint, CanvasPoint nextCanvasPoint) {
 	float PI = 3.14159265;
 	float a = GetDistance(currentCanvasPoint, previousCanvasPoint);
 	float b = GetDistance(currentCanvasPoint, nextCanvasPoint);
 	float c = GetDistance(previousCanvasPoint, nextCanvasPoint);
-	float value = std::acos((std::pow(a, 2) + std::pow(b, 2) - std::pow(c, 2)) / (2 * a * b))
-		* 180.0 / PI;
+	float value = std::acos((std::pow(a, 2) + std::pow(b, 2) - std::pow(c, 2)) /
+		(2 * a * b)) * 180.0 / PI;
 	return value;
 }
 
@@ -153,8 +182,8 @@ std::vector<CanvasPoint>Polygon::GetSetOfCanvasPointsWithAngleValues
 		CanvasPoint currentCanvasPoint = pivotCanvasPoints[currentIndex];
 		CanvasPoint nextCanvasPoint = pivotCanvasPoints[nextIndex];
 
-		float angleValue = GetAngleValue(previousCanvasPoint, currentCanvasPoint,
-			nextCanvasPoint);
+		float angleValue = GetAngleValue(previousCanvasPoint,
+			currentCanvasPoint, nextCanvasPoint);
 
 		currentCanvasPoint.SetAngle(angleValue);
 		pivotCanvasPointsWithAngles.push_back(currentCanvasPoint);
@@ -168,12 +197,14 @@ std::vector<CanvasPoint>Polygon::GetSetOfCanvasPointsWithAngleValues
 std::vector<CanvasPoint>Polygon::GetSortedListByAngles
 	(std::vector<CanvasPoint>pivotCanvasPointsWithAngles) {
 
-	std::vector<CanvasPoint> *copiedPivotCanvasPointsWithAngles = new std::vector<CanvasPoint>();
+	std::vector<CanvasPoint> *copiedPivotCanvasPointsWithAngles =
+		new std::vector<CanvasPoint>();
 
 	for (unsigned int counter = 0; counter < pivotCanvasPointsWithAngles.size();
 	counter++) {
 
-		copiedPivotCanvasPointsWithAngles->push_back(pivotCanvasPointsWithAngles[counter]);
+		copiedPivotCanvasPointsWithAngles->push_back
+			(pivotCanvasPointsWithAngles[counter]);
 
 	}
 
@@ -183,8 +214,8 @@ std::vector<CanvasPoint>Polygon::GetSortedListByAngles
 	return Copy(copiedPivotCanvasPointsWithAngles);
 }
 
-void Polygon::QuickSortByAngles(std::vector<CanvasPoint> *CanvasPoints, int left, int right)
-{
+void Polygon::QuickSortByAngles(std::vector<CanvasPoint> *CanvasPoints,
+	int left, int right) {
 
 	int i = left, j = right;
 
@@ -239,7 +270,8 @@ std::vector<CanvasPoint>Polygon::Copy(std::vector<CanvasPoint> *CanvasPoints) {
 	return resultList;
 }
 
-CanvasPoint Polygon::GetCanvasPointWithMaxAngle(std::vector<CanvasPoint>pivotCanvasPointsWithAngles) {
+CanvasPoint Polygon::GetCanvasPointWithMaxAngle
+	(std::vector<CanvasPoint>pivotCanvasPointsWithAngles) {
 
 	std::vector<CanvasPoint>sortedCanvasPointList =
 		GetSortedListByAngles(pivotCanvasPointsWithAngles);
@@ -254,7 +286,8 @@ void Polygon::GetPolygonTriangles(std::vector<Polygon> *triangles,
 	std::vector<CanvasPoint>pivotCanvasPointsWithAngles =
 		GetSetOfCanvasPointsWithAngleValues(pivotCanvasPoints);
 
-	CanvasPoint CanvasPointWithMaxAngle = GetCanvasPointWithMaxAngle(pivotCanvasPointsWithAngles);
+	CanvasPoint CanvasPointWithMaxAngle =
+		GetCanvasPointWithMaxAngle(pivotCanvasPointsWithAngles);
 
 	std::vector<CanvasPoint>restPivotCanvasPointsWithAngles;
 
@@ -270,17 +303,23 @@ void Polygon::GetPolygonTriangles(std::vector<Polygon> *triangles,
 			nextIndex = 0;
 		}
 
-		CanvasPoint previousCanvasPoint = pivotCanvasPointsWithAngles[previousIndex];
-		CanvasPoint currentCanvasPoint = pivotCanvasPointsWithAngles[currentIndex];
+		CanvasPoint previousCanvasPoint =
+			pivotCanvasPointsWithAngles[previousIndex];
+		CanvasPoint currentCanvasPoint =
+			pivotCanvasPointsWithAngles[currentIndex];
 		CanvasPoint nextCanvasPoint = pivotCanvasPointsWithAngles[nextIndex];
 
-		if (currentCanvasPoint.GetX() == CanvasPointWithMaxAngle.GetX() && currentCanvasPoint.GetY
-			() == CanvasPointWithMaxAngle.GetY() && currentCanvasPoint.GetAngle()
+		if (currentCanvasPoint.GetX() == CanvasPointWithMaxAngle.GetX()
+			&& currentCanvasPoint.GetY() == CanvasPointWithMaxAngle.GetY()
+			&& currentCanvasPoint.GetAngle()
 			== CanvasPointWithMaxAngle.GetAngle()) {
 			Polygon triangle;
-			triangle.AddPivotCanvasPoint(previousCanvasPoint.GetX(), previousCanvasPoint.GetY());
-			triangle.AddPivotCanvasPoint(currentCanvasPoint.GetX(), currentCanvasPoint.GetY());
-			triangle.AddPivotCanvasPoint(nextCanvasPoint.GetX(), nextCanvasPoint.GetY());
+			triangle.AddPivotCanvasPoint(previousCanvasPoint.GetX(),
+				previousCanvasPoint.GetY());
+			triangle.AddPivotCanvasPoint(currentCanvasPoint.GetX(),
+				currentCanvasPoint.GetY());
+			triangle.AddPivotCanvasPoint(nextCanvasPoint.GetX(),
+				nextCanvasPoint.GetY());
 		}
 		else {
 			restPivotCanvasPointsWithAngles.push_back(currentCanvasPoint);

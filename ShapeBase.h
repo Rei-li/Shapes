@@ -6,7 +6,7 @@
 class Shape {
 
 public:
-
+	void SetDpcm(int dpcm);
 	virtual float GetArea() = 0;
 	virtual float GetPerimeter() = 0;
 
@@ -17,7 +17,10 @@ public:
 	void Rotate(int x, int y);
 	void Scale(int distance);
 
+	void ClearPivotPoints();
+
 	void AddPivotCanvasPoint(int x, int y);
 	std::vector<CanvasPoint>PivotCanvasPoints;
 
+	int _dpcm;
 };

@@ -1,7 +1,15 @@
 #include "ShapeBase.h"
 #include <cmath>
 #include <vector>
-//using namespace std;
+// using namespace std;
+
+void Shape::SetDpcm(int dpcm) {
+	_dpcm = dpcm;
+}
+
+void Shape::ClearPivotPoints() {
+	PivotCanvasPoints.clear();
+}
 
 void Shape::AddPivotCanvasPoint(int x, int y) {
 	CanvasPoint CanvasPoint;
@@ -12,8 +20,8 @@ void Shape::AddPivotCanvasPoint(int x, int y) {
 }
 
 CanvasPoint Shape::GetCenter() {
-	return  CanvasPoint();
-}
+	return CanvasPoint();
+}
 
 void Shape::Rotate(int x, int y) {
 	float PI = 3.14159265;
@@ -24,10 +32,12 @@ void Shape::Rotate(int x, int y) {
 		int currentX = currentCanvasPoint.GetX();
 		int currentY = currentCanvasPoint.GetY();
 
-		float X = (float)((currentCanvasPoint.GetX() - x) * std::cos(angleRadian) -
-			(currentCanvasPoint.GetY() - y) * std::sin(angleRadian) + x);
-		float Y = (float)((currentCanvasPoint.GetX() - x) * std::sin(angleRadian) +
-			(currentCanvasPoint.GetY() - y) * std::cos(angleRadian) + y);
+		float X = (float)((currentCanvasPoint.GetX() - x) * std::cos
+			(angleRadian) - (currentCanvasPoint.GetY() - y) * std::sin
+			(angleRadian) + x);
+		float Y = (float)((currentCanvasPoint.GetX() - x) * std::sin
+			(angleRadian) + (currentCanvasPoint.GetY() - y) * std::cos
+			(angleRadian) + y);
 
 		currentCanvasPoint.SetX(X);
 		currentCanvasPoint.SetY(Y);

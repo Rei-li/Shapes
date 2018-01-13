@@ -131,6 +131,10 @@
             <DependentOn>EditorService.h</DependentOn>
             <BuildOrder>7</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Logger.cpp">
+            <DependentOn>Logger.h</DependentOn>
+            <BuildOrder>8</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Polygon.cpp">
             <DependentOn>Polygon.h</DependentOn>
             <BuildOrder>5</BuildOrder>

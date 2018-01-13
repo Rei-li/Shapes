@@ -13,6 +13,12 @@ object Form1: TForm1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object ResultLb: TLabel
+    Left = 976
+    Top = 445
+    Width = 3
+    Height = 13
+  end
   object ShapesRadioGroup: TRadioGroup
     Left = 872
     Top = 64
@@ -21,7 +27,7 @@ object Form1: TForm1
     Caption = #1060#1080#1075#1091#1088#1099
     TabOrder = 0
   end
-  object Plygon: TRadioButton
+  object PlygonBtn: TRadioButton
     Left = 904
     Top = 112
     Width = 113
@@ -50,6 +56,8 @@ object Form1: TForm1
       Top = 0
       Width = 841
       Height = 825
+      OnDblClick = EditorDblClick
+      OnMouseDown = EditorMouseDown
     end
   end
   object Actions: TRadioGroup
@@ -75,5 +83,63 @@ object Form1: TForm1
     Height = 17
     Caption = #1042#1099#1073#1088#1072#1090#1100
     TabOrder = 6
+  end
+  object GetAreaBtn: TButton
+    Left = 872
+    Top = 440
+    Width = 75
+    Height = 25
+    Caption = #1055#1083#1086#1097#1072#1076#1100
+    TabOrder = 7
+    OnClick = GetAreaBtnClick
+  end
+  object GetPerimeterBtn: TButton
+    Left = 872
+    Top = 488
+    Width = 75
+    Height = 25
+    Caption = #1055#1077#1088#1080#1084#1077#1090#1088
+    TabOrder = 8
+  end
+  object GetCenterBtn: TButton
+    Left = 872
+    Top = 536
+    Width = 75
+    Height = 25
+    Caption = #1062#1077#1085#1090#1088' '#1084#1072#1089#1089
+    TabOrder = 9
+  end
+  object ClearCanvasBtn: TButton
+    Left = 872
+    Top = 584
+    Width = 107
+    Height = 25
+    Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1093#1086#1083#1089#1090
+    TabOrder = 10
+    OnClick = ClearCanvasBtnClick
+  end
+  object Button5: TButton
+    Left = 872
+    Top = 632
+    Width = 75
+    Height = 25
+    Caption = 'Button5'
+    TabOrder = 11
+  end
+  object Button6: TButton
+    Left = 872
+    Top = 680
+    Width = 75
+    Height = 25
+    Caption = 'Button6'
+    TabOrder = 12
+  end
+  object EditModeChb: TCheckBox
+    Left = 880
+    Top = 16
+    Width = 201
+    Height = 25
+    Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1085#1080#1077
+    TabOrder = 13
   end
 end
