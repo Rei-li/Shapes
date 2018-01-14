@@ -7,14 +7,17 @@
 class Polygon : public Shape {
 
 public:
-	float GetArea();
-	float GetPerimeter();
+	long double GetArea();
+	long double GetPerimeter();
 	CanvasPoint GetCenter();
+	std::vector<Polygon>TriangulationCheck();
+	std::vector<Polygon> Move(int xStart, int yStart, int xEnd, int yEnd);
 
 private:
 	bool IsCanvasPointInPolygon(CanvasPoint CanvasPoint);
-	float GetDistance(CanvasPoint startCanvasPoint, CanvasPoint endCanvasPoint);
-	float GetAngleValue(CanvasPoint previousCanvasPoint,
+	long double GetDistance(CanvasPoint startCanvasPoint,
+		CanvasPoint endCanvasPoint);
+	long double GetAngleValue(CanvasPoint previousCanvasPoint,
 		CanvasPoint currentCanvasPoint, CanvasPoint nextCanvasPoint);
 	std::vector<CanvasPoint>GetSetOfCanvasPointsWithAngleValues
 		(std::vector<CanvasPoint>pivotCanvasPoints);

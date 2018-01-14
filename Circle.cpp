@@ -1,11 +1,11 @@
 #include "Circle.h"
 
 
-float Circle::GetArea() {
+long double Circle::GetArea() {
 	return 0;
 }
 
-float Circle::GetPerimeter() {
+long double Circle::GetPerimeter() {
 	return 0;
 }
 

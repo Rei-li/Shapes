@@ -3,10 +3,6 @@
 #include <vector>
 // using namespace std;
 
-void Shape::SetDpcm(int dpcm) {
-	_dpcm = dpcm;
-}
-
 void Shape::ClearPivotPoints() {
 	PivotCanvasPoints.clear();
 }
@@ -24,18 +20,20 @@ CanvasPoint Shape::GetCenter() {
 }
 
 void Shape::Rotate(int x, int y) {
-	float PI = 3.14159265;
-	float angleRadian = 90 * PI / 180;
+	long double PI = 3.14159265;
+	long double angleRadian = 90 * PI / 180;
 
 	for (int i = 0; i < PivotCanvasPoints.size(); i++) {
 		CanvasPoint currentCanvasPoint = PivotCanvasPoints[i];
 		int currentX = currentCanvasPoint.GetX();
 		int currentY = currentCanvasPoint.GetY();
 
-		float X = (float)((currentCanvasPoint.GetX() - x) * std::cos
+		long double X =
+			(long double)((currentCanvasPoint.GetX() - x) * std::cos
 			(angleRadian) - (currentCanvasPoint.GetY() - y) * std::sin
 			(angleRadian) + x);
-		float Y = (float)((currentCanvasPoint.GetX() - x) * std::sin
+		long double Y =
+			(long double)((currentCanvasPoint.GetX() - x) * std::sin
 			(angleRadian) + (currentCanvasPoint.GetY() - y) * std::cos
 			(angleRadian) + y);
 
@@ -57,27 +55,44 @@ void Shape::Scale(int times) {
 
 }
 
-void Shape::Move(int xStart, int yStart, int xEnd, int yEnd) {
-	for (int i = 0; i < PivotCanvasPoints.size(); i++) {
-		CanvasPoint currentCanvasPoint = PivotCanvasPoints[i];
-		int currentX = currentCanvasPoint.GetX();
-		int currentY = currentCanvasPoint.GetY();
-		currentCanvasPoint.SetX(currentX + (xStart - xEnd));
-		currentCanvasPoint.SetY(currentY + (yStart - yEnd));
-	}
-}
+//void Shape::Move(int xStart, int yStart, int xEnd, int yEnd) {
+//
+//std::vector<CanvasPoint>CurrentPivotCanvasPoints = PivotCanvasPoints;
+//	std::vector<Shape> shapeStates;
+//
+//	while(xStart != xEnd && yStart != yEnd){
+//				Shape shape;
+//
+//	}
+//
+//
+//
+//
+// ClearPivotPoints();
+//
+//	for (int i = 0; i < PivotCanvasPoints.size(); i++) {
+//		CanvasPoint currentCanvasPoint = PivotCanvasPoints[i];
+//		int currentX = currentCanvasPoint.GetX();
+//		int currentY = currentCanvasPoint.GetY();
+//
+//		AddPivotCanvasPoint(currentX + (xStart - xEnd), currentY + (yStart - yEnd));
+//	}
+//	CurrentPivotCanvasPoints.clear();
+//}
 
 void Shape::SetCenter(int x, int y) {
-	for (int i = 0; i < PivotCanvasPoints.size(); i++) {
+	std::vector<CanvasPoint>CurrentPivotCanvasPoints = PivotCanvasPoints;
+	CanvasPoint centerCanvasPoint = GetCenter();
+	int centerX = centerCanvasPoint.GetX();
+	int centerY = centerCanvasPoint.GetY();
+	ClearPivotPoints();
+	for (int i = 0; i < CurrentPivotCanvasPoints.size(); i++) {
 		CanvasPoint currentCanvasPoint = PivotCanvasPoints[i];
 		int currentX = currentCanvasPoint.GetX();
 		int currentY = currentCanvasPoint.GetY();
 
-		CanvasPoint centerCanvasPoint = GetCenter();
-		int centerX = centerCanvasPoint.GetX();
-		int centerY = centerCanvasPoint.GetY();
+		AddPivotCanvasPoint(currentX + (x - centerX), currentY + (y - centerY));
 
-		currentCanvasPoint.SetX(currentX + (x - centerX));
-		currentCanvasPoint.SetY(currentY + (y - centerY));
 	}
+	CurrentPivotCanvasPoints.clear();
 }

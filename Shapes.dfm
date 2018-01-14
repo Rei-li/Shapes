@@ -13,11 +13,63 @@ object Form1: TForm1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object ResultLb: TLabel
-    Left = 976
-    Top = 445
+  object AreaResultLb: TLabel
+    Left = 979
+    Top = 245
     Width = 3
     Height = 13
+  end
+  object PerimeterResultLb: TLabel
+    Left = 979
+    Top = 293
+    Width = 3
+    Height = 13
+  end
+  object Label1: TLabel
+    Left = 960
+    Top = 341
+    Width = 13
+    Height = 13
+    Caption = 'X: '
+  end
+  object Label2: TLabel
+    Left = 987
+    Top = 349
+    Width = 3
+    Height = 13
+  end
+  object Label3: TLabel
+    Left = 1024
+    Top = 341
+    Width = 13
+    Height = 13
+    Caption = 'Y: '
+  end
+  object CenterXLb: TLabel
+    Left = 979
+    Top = 341
+    Width = 3
+    Height = 13
+  end
+  object CenterYLb: TLabel
+    Left = 1043
+    Top = 341
+    Width = 3
+    Height = 13
+  end
+  object Label4: TLabel
+    Left = 876
+    Top = 397
+    Width = 13
+    Height = 13
+    Caption = 'X: '
+  end
+  object Label5: TLabel
+    Left = 987
+    Top = 397
+    Width = 13
+    Height = 13
+    Caption = 'Y: '
   end
   object ShapesRadioGroup: TRadioGroup
     Left = 872
@@ -58,81 +110,62 @@ object Form1: TForm1
       Height = 825
       OnDblClick = EditorDblClick
       OnMouseDown = EditorMouseDown
+      OnMouseUp = EditorMouseUp
     end
-  end
-  object Actions: TRadioGroup
-    Left = 872
-    Top = 248
-    Width = 209
-    Height = 153
-    Caption = #1044#1077#1081#1089#1090#1074#1080#1103
-    TabOrder = 4
-  end
-  object EditBtn: TRadioButton
-    Left = 904
-    Top = 296
-    Width = 113
-    Height = 17
-    Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1090#1100
-    TabOrder = 5
-  end
-  object SelectBtn: TRadioButton
-    Left = 904
-    Top = 344
-    Width = 113
-    Height = 17
-    Caption = #1042#1099#1073#1088#1072#1090#1100
-    TabOrder = 6
   end
   object GetAreaBtn: TButton
     Left = 872
-    Top = 440
+    Top = 240
     Width = 75
     Height = 25
     Caption = #1055#1083#1086#1097#1072#1076#1100
-    TabOrder = 7
+    TabOrder = 4
     OnClick = GetAreaBtnClick
   end
   object GetPerimeterBtn: TButton
     Left = 872
-    Top = 488
+    Top = 288
     Width = 75
     Height = 25
     Caption = #1055#1077#1088#1080#1084#1077#1090#1088
-    TabOrder = 8
+    TabOrder = 5
+    OnClick = GetPerimeterBtnClick
   end
   object GetCenterBtn: TButton
     Left = 872
-    Top = 536
+    Top = 336
     Width = 75
     Height = 25
     Caption = #1062#1077#1085#1090#1088' '#1084#1072#1089#1089
-    TabOrder = 9
+    TabOrder = 6
+    OnClick = GetCenterBtnClick
   end
   object ClearCanvasBtn: TButton
     Left = 872
     Top = 584
-    Width = 107
+    Width = 209
     Height = 25
     Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1093#1086#1083#1089#1090
-    TabOrder = 10
+    TabOrder = 7
     OnClick = ClearCanvasBtnClick
   end
-  object Button5: TButton
+  object TriangulationCheckBtn: TButton
     Left = 872
     Top = 632
-    Width = 75
+    Width = 209
     Height = 25
-    Caption = 'Button5'
-    TabOrder = 11
+    Caption = #1055#1088#1086#1074#1077#1088#1080#1090#1100' '#1090#1088#1080#1072#1085#1075#1091#1083#1103#1094#1080#1102
+    TabOrder = 8
+    OnClick = TriangulationCheckBtnClick
   end
-  object Button6: TButton
+  object CenterChangeBtn: TButton
     Left = 872
-    Top = 680
-    Width = 75
+    Top = 421
+    Width = 209
     Height = 25
-    Caption = 'Button6'
-    TabOrder = 12
+    Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1094#1077#1085#1090#1088
+    TabOrder = 9
+    OnClick = CenterChangeBtnClick
   end
   object EditModeChb: TCheckBox
     Left = 880
@@ -140,6 +173,35 @@ object Form1: TForm1
     Width = 201
     Height = 25
     Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1085#1080#1077
-    TabOrder = 13
+    TabOrder = 10
+    OnClick = EditModeChbClick
+  end
+  object CenterXInput: TEdit
+    Left = 895
+    Top = 394
+    Width = 78
+    Height = 21
+    TabOrder = 11
+  end
+  object CenterYInput: TEdit
+    Left = 1006
+    Top = 394
+    Width = 75
+    Height = 21
+    TabOrder = 12
+  end
+  object MoveTmr: TTimer
+    Interval = 1
+    OnTimer = MoveTmrTimer
+    Left = 912
+    Top = 752
+  end
+  object RotateTmr: TTimer
+    Left = 976
+    Top = 752
+  end
+  object ScaleTmr: TTimer
+    Left = 1040
+    Top = 752
   end
 end

@@ -6,8 +6,8 @@
 class Circle : public Shape {
 
 public:
-	float GetArea();
-	float GetPerimeter();
+	long double GetArea();
+	long double GetPerimeter();
 	CanvasPoint GetCenter();
 
 	void SetCenter();
