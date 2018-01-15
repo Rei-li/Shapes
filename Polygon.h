@@ -12,6 +12,8 @@ public:
 	CanvasPoint GetCenter();
 	std::vector<Polygon>TriangulationCheck();
 	std::vector<Polygon> Move(int xStart, int yStart, int xEnd, int yEnd);
+	std::vector<Polygon> Rotate(int x, int y);
+		std::vector<Polygon> Scale();
 
 private:
 	bool IsCanvasPointInPolygon(CanvasPoint CanvasPoint);

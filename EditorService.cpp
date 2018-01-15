@@ -94,6 +94,14 @@ void EditorService::ClearMoveElements() {
 	_polygonStates.clear();
 }
 
+void EditorService::RotatePolygon() {
+	_polygonStates = _polygon.Rotate(_startMoveX, _startMoveY);
+}
+
+void EditorService::ScalePolygon() {
+	_polygonStates = _polygon.Scale();
+}
+
 // void EditorService::Set—ircleCenter(int x, int y){
 // _circle.SetCenter( x,  y);
 // }

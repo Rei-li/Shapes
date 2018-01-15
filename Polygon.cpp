@@ -457,27 +457,27 @@ std::vector<Polygon>Polygon::Move(int xStart, int yStart, int xEnd, int yEnd) {
 	double xStartDouble = xEnd;
 	double yStartDouble = yEnd;
 
-	double q  = 3;
+	double q = 3;
 
 	if (abs(xDistance) > abs(yDistance)) {
 		xPixelsInterval = q;
-		int times =  xDistance/q;
-		yPixelsInterval = abs(double (yDistance) / double (times));
+		int times = xDistance / q;
+		yPixelsInterval = abs(double(yDistance) / double(times));
 
 	}
 	else {
 		yPixelsInterval = q;
-		int times =  yDistance/q;
-		xPixelsInterval = abs( double (xDistance) / double (times));
+		int times = yDistance / q;
+		xPixelsInterval = abs(double(xDistance) / double(times));
 	}
 
-	 if (xDistance < 0) {
-	 xPixelsInterval = xPixelsInterval*-1;
-	 }
+	if (xDistance < 0) {
+		xPixelsInterval = xPixelsInterval*-1;
+	}
 
-	 if (yDistance < 0) {
-	 yPixelsInterval = yPixelsInterval*-1;
-	 }
+	if (yDistance < 0) {
+		yPixelsInterval = yPixelsInterval*-1;
+	}
 
 	while (xStart != xStartDouble && yStart != yStartDouble) {
 		Polygon polygon;
@@ -525,4 +525,123 @@ std::vector<Polygon>Polygon::Move(int xStart, int yStart, int xEnd, int yEnd) {
 	CurrentPivotCanvasPoints.clear();
 
 	return shapeStates;
+}
+
+std::vector<Polygon>Polygon::Rotate(int x, int y) {
+
+	std::vector<CanvasPoint>CurrentPivotCanvasPoints = PivotCanvasPoints;
+	long double PI = 3.14159265;
+	int maxAngle = 90;
+
+	std::vector<Polygon>shapeStates;
+
+	int currentAngle = 1;
+
+	while (currentAngle <= maxAngle) {
+		long double angleRadian = currentAngle * PI / 180;
+
+		Polygon polygon;
+
+		for (int i = 0; i < CurrentPivotCanvasPoints.size(); i++) {
+			CanvasPoint currentCanvasPoint = CurrentPivotCanvasPoints[i];
+			int currentX = currentCanvasPoint.GetX();
+			int currentY = currentCanvasPoint.GetY();
+
+			long double X =
+				(long double)((currentCanvasPoint.GetX() - x) * std::cos
+				(angleRadian) - (currentCanvasPoint.GetY() - y) * std::sin
+				(angleRadian) + x);
+			long double Y =
+				(long double)((currentCanvasPoint.GetX() - x) * std::sin
+				(angleRadian) + (currentCanvasPoint.GetY() - y) * std::cos
+				(angleRadian) + y);
+
+			polygon.AddPivotCanvasPoint(X, Y);
+		}
+		shapeStates.push_back(polygon);
+
+		currentAngle = currentAngle + 1;
+
+	}
+
+	ClearPivotPoints();
+
+	long double angleRadian = maxAngle * PI / 180;
+	for (int i = 0; i < CurrentPivotCanvasPoints.size(); i++) {
+		CanvasPoint currentCanvasPoint = CurrentPivotCanvasPoints[i];
+		int currentX = currentCanvasPoint.GetX();
+		int currentY = currentCanvasPoint.GetY();
+
+		long double X =
+			(long double)((currentCanvasPoint.GetX() - x) * std::cos
+			(angleRadian) - (currentCanvasPoint.GetY() - y) * std::sin
+			(angleRadian) + x);
+		long double Y =
+			(long double)((currentCanvasPoint.GetX() - x) * std::sin
+			(angleRadian) + (currentCanvasPoint.GetY() - y) * std::cos
+			(angleRadian) + y);
+
+		AddPivotCanvasPoint(X, Y);
+
+	}
+	return shapeStates;
+}
+
+std::vector<Polygon>Polygon::Scale() {
+
+	double scale = 2;
+
+	std::vector<CanvasPoint>CurrentPivotCanvasPoints = PivotCanvasPoints;
+
+	CanvasPoint centerCanvasPoint = GetCenter();
+	int centerX = centerCanvasPoint.GetX();
+	int centerY = centerCanvasPoint.GetY();
+
+
+
+
+	std::vector<Polygon>shapeStates;
+
+	double currentScale = 1;
+
+	while (currentScale <= scale) {
+		Polygon polygon;
+
+		for (int i = 0; i < CurrentPivotCanvasPoints.size(); i++) {
+			CanvasPoint currentCanvasPoint = CurrentPivotCanvasPoints[i];
+			int currentX = currentCanvasPoint.GetX();
+			int currentY = currentCanvasPoint.GetY();
+
+			int scaledX = currentX / scale;
+			int scaledY = currentY / scale;
+
+			polygon.AddPivotCanvasPoint(scaledX, scaledY);
+		}
+
+		  polygon.SetCenter(centerX, centerY)   ;
+
+		shapeStates.push_back(polygon);
+
+		currentScale = currentScale + 0.1;
+
+	}
+
+
+
+
+	ClearPivotPoints();
+
+	for (int i = 0; i < CurrentPivotCanvasPoints.size(); i++) {
+		CanvasPoint currentCanvasPoint = CurrentPivotCanvasPoints[i];
+		int currentX = currentCanvasPoint.GetX();
+		int currentY = currentCanvasPoint.GetY();
+		AddPivotCanvasPoint(currentX / scale, currentY / scale);
+	}
+	  SetCenter(centerX, centerY) ;
+
+
+
+
+	return shapeStates;
+
 }

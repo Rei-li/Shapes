@@ -160,8 +160,8 @@ void __fastcall TForm1::EditorMouseUp(TObject *Sender, TMouseButton Button,
 			()) + "; Y: " + std::to_string(EditorService::GetEndMovePointY()));
 
 		EditorService::SetEndMovePoint(X, Y);
-		EditorService::MovePolygon();
-		MoveTmr->Enabled = True;
+		// EditorService::MovePolygon();
+		// MoveTmr->Enabled = True;
 	}
 }
 // ---------------------------------------------------------------------------
@@ -223,6 +223,46 @@ void __fastcall TForm1::EditModeChbClick(TObject *Sender) {
 					+ "; Y: " + std::to_string(points[counter].GetY()));
 			}
 		}
+	}
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TForm1::RotateBtnClick(TObject *Sender) {
+
+	if (!EditModeChb->Checked) {
+
+		EditorService::RotatePolygon();
+		MoveTmr->Enabled = True;
+	}
+
+	// Editor->Canvas->Brush->Color = clCream;
+	// Editor->Canvas->FillRect(Rect(0, 0, Editor->Width, Editor->Height));
+	// Editor->Canvas->Brush->Color = clBlack;
+	//
+	// class Polygon polygonEdited = EditorService::GetPolygon();
+	// std::vector<CanvasPoint>points = polygonEdited.PivotCanvasPoints;
+	//
+	// Editor->Canvas->MoveTo(points[0].GetX(), points[0].GetY());
+	// for (int i = 1; i < points.size(); i++) {
+	// Editor->Canvas->LineTo(points[i].GetX(), points[i].GetY());
+	// }
+	// Editor->Canvas->LineTo(points[0].GetX(), points[0].GetY());
+}
+// ---------------------------------------------------------------------------
+
+void __fastcall TForm1::MoveBtnClick(TObject *Sender) {
+	if (!EditModeChb->Checked) {
+
+		EditorService::MovePolygon();
+		MoveTmr->Enabled = True;
+	}
+}
+// ---------------------------------------------------------------------------
+
+void __fastcall TForm1::ScaleDownBtnClick(TObject *Sender) {
+	if (!EditModeChb->Checked) {
+		EditorService::ScalePolygon();
+		MoveTmr->Enabled = True;
 	}
 }
 // ---------------------------------------------------------------------------

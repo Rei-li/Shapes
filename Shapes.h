@@ -42,6 +42,10 @@ __published:	// IDE-managed Components
 	TTimer *MoveTmr;
 	TTimer *RotateTmr;
 	TTimer *ScaleTmr;
+	TButton *RotateBtn;
+	TButton *MoveBtn;
+	TButton *ScaleDownBtn;
+	TButton *ScaleUpBtn;
 	void __fastcall EditorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift,
           int X, int Y);
 	void __fastcall EditorDblClick(TObject *Sender);
@@ -55,6 +59,9 @@ __published:	// IDE-managed Components
           int X, int Y);
 	void __fastcall MoveTmrTimer(TObject *Sender);
 	void __fastcall EditModeChbClick(TObject *Sender);
+	void __fastcall RotateBtnClick(TObject *Sender);
+	void __fastcall MoveBtnClick(TObject *Sender);
+	void __fastcall ScaleDownBtnClick(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

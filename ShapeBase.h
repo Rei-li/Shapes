@@ -14,8 +14,8 @@ public:
 
 	void SetCenter(int x, int y);
 //	void Move(int xStart, int yStart, int xEnd, int yEnd);
-	void Rotate(int x, int y);
-	void Scale(int distance);
+//	void Rotate(int x, int y);
+//	void Scale(int distance);
 
 	void ClearPivotPoints();
 

@@ -142,7 +142,7 @@ object Form1: TForm1
   end
   object ClearCanvasBtn: TButton
     Left = 872
-    Top = 584
+    Top = 648
     Width = 209
     Height = 25
     Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1093#1086#1083#1089#1090
@@ -151,7 +151,7 @@ object Form1: TForm1
   end
   object TriangulationCheckBtn: TButton
     Left = 872
-    Top = 632
+    Top = 696
     Width = 209
     Height = 25
     Caption = #1055#1088#1086#1074#1077#1088#1080#1090#1100' '#1090#1088#1080#1072#1085#1075#1091#1083#1103#1094#1080#1102
@@ -190,7 +190,43 @@ object Form1: TForm1
     Height = 21
     TabOrder = 12
   end
+  object RotateBtn: TButton
+    Left = 872
+    Top = 480
+    Width = 209
+    Height = 25
+    Caption = #1055#1086#1074#1077#1088#1085#1091#1090#1100' '#1085#1072' 90'
+    TabOrder = 13
+    OnClick = RotateBtnClick
+  end
+  object MoveBtn: TButton
+    Left = 872
+    Top = 528
+    Width = 209
+    Height = 25
+    Caption = #1055#1077#1088#1077#1076#1074#1080#1085#1091#1090#1100
+    TabOrder = 14
+    OnClick = MoveBtnClick
+  end
+  object ScaleDownBtn: TButton
+    Left = 932
+    Top = 592
+    Width = 41
+    Height = 25
+    Caption = '-'
+    TabOrder = 15
+    OnClick = ScaleDownBtnClick
+  end
+  object ScaleUpBtn: TButton
+    Left = 979
+    Top = 592
+    Width = 38
+    Height = 25
+    Caption = '+'
+    TabOrder = 16
+  end
   object MoveTmr: TTimer
+    Enabled = False
     Interval = 1
     OnTimer = MoveTmrTimer
     Left = 912

@@ -13,7 +13,8 @@ class EditorService {
 	static int _endMoveX;
 	static int _endMoveY;
 
-	static std::vector<class Polygon> _polygonStates ;
+	static std::vector<class Polygon>_polygonStates;
+
 	static int _statesIndex;
 
 public:
@@ -34,12 +35,15 @@ public:
 	static int GetEndMovePointX();
 	static int GetEndMovePointY();
 
-	static void MovePolygon() ;
-	static std::vector<class Polygon> GetPolygonStates();
+	static void MovePolygon();
+	static std::vector<class Polygon>GetPolygonStates();
 	static void SetStatesIndex(int index);
 	static int GetStatesIndex();
 
-    	static void ClearMoveElements();
-//	static void SetCircleCenter(int x, int y);
+	static void RotatePolygon();
+	static void ScalePolygon();
+
+	static void ClearMoveElements();
+	// static void SetCircleCenter(int x, int y);
 	// static Circle EditorService::Get—ircle();
 };

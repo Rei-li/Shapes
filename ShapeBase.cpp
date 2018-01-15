@@ -19,41 +19,41 @@ CanvasPoint Shape::GetCenter() {
 	return CanvasPoint();
 }
 
-void Shape::Rotate(int x, int y) {
-	long double PI = 3.14159265;
-	long double angleRadian = 90 * PI / 180;
+//void Shape::Rotate(int x, int y) {
+//	long double PI = 3.14159265;
+//	long double angleRadian = 90 * PI / 180;
+//
+//	for (int i = 0; i < PivotCanvasPoints.size(); i++) {
+//		CanvasPoint currentCanvasPoint = PivotCanvasPoints[i];
+//		int currentX = currentCanvasPoint.GetX();
+//		int currentY = currentCanvasPoint.GetY();
+//
+//		long double X =
+//			(long double)((currentCanvasPoint.GetX() - x) * std::cos
+//			(angleRadian) - (currentCanvasPoint.GetY() - y) * std::sin
+//			(angleRadian) + x);
+//		long double Y =
+//			(long double)((currentCanvasPoint.GetX() - x) * std::sin
+//			(angleRadian) + (currentCanvasPoint.GetY() - y) * std::cos
+//			(angleRadian) + y);
+//
+//		currentCanvasPoint.SetX(X);
+//		currentCanvasPoint.SetY(Y);
+//
+//	}
+//
+//}
 
-	for (int i = 0; i < PivotCanvasPoints.size(); i++) {
-		CanvasPoint currentCanvasPoint = PivotCanvasPoints[i];
-		int currentX = currentCanvasPoint.GetX();
-		int currentY = currentCanvasPoint.GetY();
-
-		long double X =
-			(long double)((currentCanvasPoint.GetX() - x) * std::cos
-			(angleRadian) - (currentCanvasPoint.GetY() - y) * std::sin
-			(angleRadian) + x);
-		long double Y =
-			(long double)((currentCanvasPoint.GetX() - x) * std::sin
-			(angleRadian) + (currentCanvasPoint.GetY() - y) * std::cos
-			(angleRadian) + y);
-
-		currentCanvasPoint.SetX(X);
-		currentCanvasPoint.SetY(Y);
-
-	}
-
-}
-
-void Shape::Scale(int times) {
-	for (int i = 0; i < PivotCanvasPoints.size(); i++) {
-		CanvasPoint currentCanvasPoint = PivotCanvasPoints[i];
-		int currentX = currentCanvasPoint.GetX();
-		int currentY = currentCanvasPoint.GetY();
-		currentCanvasPoint.SetX(currentX / times);
-		currentCanvasPoint.SetY(currentY / times);
-	}
-
-}
+//void Shape::Scale(int times) {
+//	for (int i = 0; i < PivotCanvasPoints.size(); i++) {
+//		CanvasPoint currentCanvasPoint = PivotCanvasPoints[i];
+//		int currentX = currentCanvasPoint.GetX();
+//		int currentY = currentCanvasPoint.GetY();
+//		currentCanvasPoint.SetX(currentX / times);
+//		currentCanvasPoint.SetY(currentY / times);
+//	}
+//
+//}
 
 //void Shape::Move(int xStart, int yStart, int xEnd, int yEnd) {
 //
